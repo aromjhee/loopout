@@ -32,10 +32,12 @@
 # Model
 - Time Table
     - activityName
+        - future implementation
+    - sessionName
     - startTime
     - endTime
-    - breakTime??
-    - sessionName
+    - breakTime
+        - future implementation
 
 # Component
 - BreakLength??
@@ -43,3 +45,6 @@
 
 # Technology
 - Tailwind
+
+# Future Implementation
+- drag-n-drop to re-order sessions
