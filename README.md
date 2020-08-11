@@ -35,7 +35,7 @@
     - startTime
     - endTime
     - breakTime??
-    - sessionLabel
+    - sessionName
 
 # Component
 - BreakLength??
