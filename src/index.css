@@ -39,14 +39,14 @@
 .custom-animation::before {
   border: 3px solid #fafafa;
   border-radius: 100%;
-  animation: 1s linear infinite alternate abberation, 4s linear infinite spin;
+  animation: 1s linear infinite alternate aberration, 4s linear infinite spin;
   padding-top: 100%;
   content: "";
   position: relative;
   pointer-events: none;
 }
 
-@keyframes abberation {
+@keyframes aberration {
   from {
     box-shadow: 0 0 0 0 #CB2918, 0 0 0 0 #56719A;
   }
