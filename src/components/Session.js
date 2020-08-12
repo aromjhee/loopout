@@ -101,7 +101,7 @@ export default function Session() {
             <FontAwesomeIcon icon={faPlusCircle} size='2x' color='#4fd1c5' /></button>
         </div>
       </div>
-      <table className='row-start-5 row-span-3 text-3xl col-start-1 col-span-3 border-4 border-purple-500 rounded-lg'>
+      <table className='row-start-5 row-span-3 text-3xl col-start-1 col-span-3 border-4 border-purple-500 rounded-lg w-screen'>
         <thead className='border-b-4 border-purple-500'>
           <tr>
             <th>Name</th>
