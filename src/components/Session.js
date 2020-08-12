@@ -3,7 +3,7 @@ import url from './url';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusSquare, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
-export default function PieChart() {
+export default function Session() {
   const [sessions, setSessions] = useState([])
 
   const [sessionName, setSessionName] = useState('')
@@ -11,11 +11,15 @@ export default function PieChart() {
   const [newMinutes, setNewMinutes] = useState('')
   const [newSeconds, setNewSeconds] = useState('')
 
-  async function fetchSessions() {
+  async function fetchSessionsList() {
     const res = await fetch(url);
     const json = await res.json();
     setSessions(json.sessions);
   }
+
+  useEffect(() => {
+    fetchSessionsList()
+  }, [])
 
   async function addSession() {
     try {
@@ -34,7 +38,7 @@ export default function PieChart() {
         setNewHours('')
         setNewMinutes('')
         setNewSeconds('')
-        fetchSessions()
+        fetchSessionsList()
       }
     } catch (e) {
       console.log(e)
@@ -55,9 +59,6 @@ export default function PieChart() {
     }
   }
 
-  useEffect(() => {
-    fetchSessions()
-  }, [])
 
   return (     
     <div className='flex flex-col'>
@@ -76,19 +77,22 @@ export default function PieChart() {
             type='number'
             value={newHours}
             placeholder='Hours'
-            onChange={e => setNewHours(parseInt(e.target.value, 10))} />
+            onChange={e => 
+              setNewHours(parseInt(e.target.value === '' ? 0 : e.target.value, 10))} />
           <input
             className='text-center mx-2 bg-custom border border-gray-100 rounded-lg'
             type='number'
             value={newMinutes}
             placeholder='Minutes'
-            onChange={e => setNewMinutes(parseInt(e.target.value, 10))} />
+            onChange={e => 
+              setNewMinutes(parseInt(e.target.value === '' ? 0 : e.target.value, 10))} />
           <input
             className='text-center mx-2 bg-custom border border-gray-100 rounded-lg'
             type='number'
             value={newSeconds}
             placeholder='Seconds'
-            onChange={e => setNewSeconds(parseInt(e.target.value, 10))} />
+            onChange={e => 
+              setNewSeconds(parseInt(e.target.value === '' ? 0 : e.target.value, 10))} />
         </div>
         <div className='my-16'>
           <button
@@ -106,27 +110,39 @@ export default function PieChart() {
           </tr>
         </thead>
         <tbody>
-          {sessions.map((x, i) => {
-            const y = x.duration.split(':')
-            const name = x.name
-            const hours = (y[0] === 0 || y[0] === '') ? '00' : y[0] < 10 ? 
-                          `${0}${y[0]}` : y[0];
-            const minutes = (y[1] === 0 || y[1] === '') ? '00' : y[1] < 10 ? 
-                          `${0}${y[1]}` : y[1];
-            const seconds = (y[2] === 0 || y[2] === '') ? '00' : y[2] < 10 ? 
-                          `${0}${y[2]}` : y[2];
-
-            return (
-              <tr key={i} className='text-center'>
-                <td>{name}</td>
-                <td>{`${hours}:${minutes}:${seconds}`}</td>
-                <td>
-                  <button onClick={() => {deleteSession(x.id)}}>
-                    <FontAwesomeIcon icon={faMinusSquare} size='2x' color='red' /></button>
-                </td>
+          {sessions.length === 0 ? 
+            (
+              <tr>
+                <td>Loading...</td>
+                <td>Loading...</td>
+                <td>Loading...</td>
               </tr>
+            ) : 
+            (
+              sessions.map((x, i) => {
+                const y = x.duration.split(':')
+                let [a, b, c] = y
+                const name = x.name
+                const hours = (a === 0 || a === '') ? '00' : a < 10 ? 
+                              `${0}${a}` : a;
+                const minutes = (b === 0 || b === '') ? '00' : b < 10 ? 
+                              `${0}${b}` : b;
+                const seconds = (c === 0 || c === '') ? '00' : c < 10 ? 
+                              `${0}${c}` : c;
+
+                return (
+                  <tr key={i} className='text-center'>
+                    <td>{name}</td>
+                    <td>{`${hours}:${minutes}:${seconds}`}</td>
+                    <td>
+                      <button onClick={() => {deleteSession(x.id)}}>
+                        <FontAwesomeIcon icon={faMinusSquare} size='2x' color='red' /></button>
+                    </td>
+                  </tr>
+                )
+              })
             )
-          })}
+          }
         </tbody>
       </table>
     </div>

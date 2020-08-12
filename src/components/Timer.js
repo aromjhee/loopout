@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PieChart from './PieChart';
-import SessionList from './SessionList';
+import Session from './Session';
 import url from './url';
 
 export default function Timer() {
+  const [sessions, setSessions] = useState([])
   const [hours, setHours] = useState(0)
   const [minutes, setMinutes] = useState(0)
   const [seconds, setSeconds] = useState(0)
@@ -12,6 +13,31 @@ export default function Timer() {
   function timeDisplay(s) {
     return s === 0 ? '00' : s < 10 ? `${0}${s}` : s;
   }
+
+  function toNum(n) {
+    return parseInt(n === '' ? 0 : n, 10)
+  }
+
+  const loadTimer = useCallback(
+    (sessions) => {
+      const { duration } = sessions[0]
+      const [hours, minutes, seconds] = duration.split(':');
+
+      setHours(toNum(hours))
+      setMinutes(toNum(minutes))
+      setSeconds(toNum(seconds))
+    }, []
+  )
+
+  useEffect(() => {
+    (async function fetchSessions() {
+      const res = await fetch(url);
+      const json = await res.json();
+      setSessions(json.sessions)
+      loadTimer(json.sessions)
+    })();
+  }, [loadTimer])
+
 
   useEffect(() => {
     if (isRunning) {
@@ -27,45 +53,49 @@ export default function Timer() {
         setMinutes(minutes - 1)
         setSeconds(59)
       } else if (hours === 0 && minutes === 0 && seconds === 0) {
-        clearInterval(id)
+        if (sessions.length > 0) {
+          sessions.shift()
+          if (sessions.length === 0) {
+            setIsRunning(false)
+            clearInterval(id)
+          } else {
+            loadTimer(sessions)
+          }
+        }
       }
 
       return () => clearInterval(id)
     }
-  }, [isRunning, hours, minutes, seconds])
+  }, [isRunning, hours, minutes, seconds, sessions, loadTimer])
 
-  useEffect(() => {
-    (async function fetchSessions() {
-      const res = await fetch(url);
-      const json = await res.json();
-      const { duration } = json.sessions[0]
-      const [ hours, minutes, seconds ] = duration.split(':')
-      setHours(parseInt(hours, 10))
-      setMinutes(parseInt(minutes, 10))
-      setSeconds(parseInt(seconds, 10))
-    })();
-  }, [])
+  // useEffect(() => {
+  //   if (sessions.length > 0 && sessions[0].duration !== `${hours}:${minutes}:${seconds}`) {
+  //     loadTimer(sessions)
+  //   }
+  // },[sessions, hours, minutes, seconds])
 
   return (
     <div className='h-screen grid grid-rows-8 grid-cols-3'>
       <PieChart />
       <div className='row-start-3 row-span-1 col-start-1 col-span-3 text-4xl flex flex-col justify-evenly align-center items-center'>
-        <div className='text-6xl w-335px p-8 border-blue-400 border-8 rounded-full'>
-          {timeDisplay(hours)}:
-          {timeDisplay(minutes)}:
-          {timeDisplay(seconds)}
+        <div className='custom-animation'>
+          <div className='time'>
+            {timeDisplay(hours)}:
+            {timeDisplay(minutes)}:
+            {timeDisplay(seconds)}
+          </div>
         </div>
         <div className='flex m-16'>
           <button
-            className='text-4xl mx-16 px-5 py-2 border-green-800 border-8 rounded-lg'
+            className='text-4xl mx-16 px-5 py-2 border-green-800 border-8 radius-custom'
             onClick={() => setIsRunning(true)}>Start</button>
           <button
-            className='text-4xl mx-16 px-5 py-2 border-red-400 border-8 rounded-lg'
+            className='text-4xl mx-16 px-5 py-2 border-red-400 border-8 radius-custom'
             onClick={() => setIsRunning(false)}>Stop</button>
         </div>
       </div>
       <div className='row-start-4 row-span-4 col-start-1 col-span-3'>
-        <SessionList />
+        <Session sessions={sessions}/>
       </div>
     </div>
   )
