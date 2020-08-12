@@ -77,6 +77,7 @@ export default function Timer() {
   return (
     <div className='h-screen grid grid-rows-8 grid-cols-3'>
       <PieChart />
+      <p className='text-2xl row-end-3 row-span-3 col-start-1 col-span-3 flex justify-center items-end'>***Time is set to decrease by 100ms***</p>
       <div className='row-start-3 row-span-1 col-start-1 col-span-3 text-4xl flex flex-col justify-evenly align-center items-center'>
         <div className='custom-animation'>
           <div className='time'>
@@ -95,7 +96,7 @@ export default function Timer() {
         </div>
       </div>
       <div className='row-start-4 row-span-4 col-start-1 col-span-3'>
-        <Session sessions={sessions}/>
+        <Session sessions={sessions} setSessions={setSessions} />
       </div>
     </div>
   )
