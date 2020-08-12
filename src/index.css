@@ -55,7 +55,7 @@
     box-shadow: 0 0 0 0 #CB2918, 0 0 0 0 #56719A;
   }
   to {
-    box-shadow: 0.25rem 0.125rem 0 0 #CB2918, -0.25rem -0.125rem 0 0 #56719A;
+    box-shadow: 0.5rem 0.25rem 0 0 #CB2918, -0.5rem -0.25rem 0 0 #56719A;
   }
 }
 
