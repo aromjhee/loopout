@@ -65,7 +65,7 @@ export default function Session() {
       <div className='row-start-4 row-span-1 text-3xl col-start-1 col-span-3 flex flex-col items-center'>
         <div className='my-16'>
           <input
-            className='text-center bg-custom border border-gray-100 rounded-lg'
+            className='w-custom h-20 text-center bg-custom border border-indigo-400 rounded-lg'
             type='text' 
             value={sessionName}
             placeholder='Enter Session Name'
@@ -73,21 +73,21 @@ export default function Session() {
         </div>
         <div className='flex flex-no-wrap'>
           <input
-            className='text-center mx-2 bg-custom border border-gray-100 rounded-lg'
+            className='h-20 text-center mx-2 bg-custom border border-indigo-400 rounded-lg'
             type='number'
             value={newHours}
             placeholder='Hours'
             onChange={e => 
               setNewHours(parseInt(e.target.value === '' ? 0 : e.target.value, 10))} />
           <input
-            className='text-center mx-2 bg-custom border border-gray-100 rounded-lg'
+            className='h-20 text-center mx-2 bg-custom border border-indigo-400 rounded-lg'
             type='number'
             value={newMinutes}
             placeholder='Minutes'
             onChange={e => 
               setNewMinutes(parseInt(e.target.value === '' ? 0 : e.target.value, 10))} />
           <input
-            className='text-center mx-2 bg-custom border border-gray-100 rounded-lg'
+            className='h-20 text-center mx-2 bg-custom border border-indigo-400 rounded-lg'
             type='number'
             value={newSeconds}
             placeholder='Seconds'
@@ -98,7 +98,7 @@ export default function Session() {
           <button
             className='text-center'
             onClick={addSession}>
-            <FontAwesomeIcon icon={faPlusCircle} size='2x' color='gray' /></button>
+            <FontAwesomeIcon icon={faPlusCircle} size='2x' color='#4fd1c5' /></button>
         </div>
       </div>
       <table className='row-start-5 row-span-3 text-3xl col-start-1 col-span-3 border-4 border-purple-500 rounded-lg'>
@@ -136,7 +136,7 @@ export default function Session() {
                     <td>{`${hours}:${minutes}:${seconds}`}</td>
                     <td>
                       <button onClick={() => {deleteSession(x.id)}}>
-                        <FontAwesomeIcon icon={faMinusSquare} size='2x' color='red' /></button>
+                        <FontAwesomeIcon icon={faMinusSquare} size='2x' color='#fc8181' /></button>
                     </td>
                   </tr>
                 )
