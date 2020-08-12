@@ -1,10 +1,15 @@
-/* html {
-  font-size: 80%;
+.font-custom {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
-  color: #322f3d;
-  height: 100vh;
-  margin: 0px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-} */
+.w-335px {
+  width: 335px;
+}
+
+.bg-custom {
+  background-color: #1b262c;
+}
+
+.font-color-custom {
+  color: white;
+}
