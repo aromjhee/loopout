@@ -69,31 +69,11 @@ export default function Timer() {
           setIsRunning(false)
           setRestart(!restart)
         }
-        
-        // const a = sessions.shift()
-        // const newSessions = sessions.filter((session, i) => i !== 0)
-        // const newSessions = sessions.filter((session, i) => session !== a)
-        // setSessions(newSessions)
-        // console.log('--------------', sessions)
-        // if (newSessions.length === 0) {
-        //   console.log('+++++++++++++++++')
-        //   clearInterval(intervalId)
-        //   setRestart(true)
-        //   setIsRunning(false)
-        // } else {
-        //   console.log('*************', sessions)
-        //   console.log('*************', newSessions)
-        //   setSessions(newSessions)
-        //   setIsRunning(false)
-        //   setShowAlarm(true)
-        //   loadTimer(newSessions)
-        // }
       }
 
       return () => clearInterval(intervalId)
     }
-  }, [isRunning, hours, minutes, seconds, sessions, loadTimer, showAlarm])
-
+  }, [isRunning, hours, minutes, seconds, sessions, loadTimer, showAlarm, restart])
   return (
     <div className='h-screen grid grid-rows-8 grid-cols-3'>
       {showAlarm ? 
@@ -109,7 +89,6 @@ export default function Timer() {
                 className='text-6xl mx-16 px-5 py-10 border-orange-900 border-8 radius-custom'
                 onClick={() => {
                   setShowAlarm(false)
-                  // setIsRunning(true)
                 }}>STOP</button>
             </div>
           </div>
@@ -136,7 +115,10 @@ export default function Timer() {
         </div>
       </div>
       <div className='row-start-4 row-span-4 col-start-1 col-span-3'>
-        <Session sessions={sessions} setSessions={setSessions} />
+        <Session 
+          sessions={sessions} 
+          setSessions={setSessions} 
+          loadTimer={loadTimer} />
       </div>
     </div>
   )

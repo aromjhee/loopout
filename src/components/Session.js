@@ -3,8 +3,7 @@ import url from './url';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusSquare, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
-export default function Session() {
-  const [sessions, setSessions] = useState([])
+export default function Session({ sessions, setSessions, loadTimer }) {
 
   const [sessionName, setSessionName] = useState('')
   const [newHours, setNewHours] = useState('')
@@ -53,6 +52,7 @@ export default function Session() {
       if (res.ok) {
         const sessionClone = sessions.filter(x => x.id !== id)
         setSessions(sessionClone)
+        loadTimer(sessionClone)
       }
     } catch(e) {
       console.log(e)
