@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import PieChart from './PieChart';
 import Session from './Session';
+import Alarm from './Alarm';
 import url from './url';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell } from '@fortawesome/free-solid-svg-icons';
+import ps1 from '../sound/ps1.mp3';
+import { Howl } from 'howler';
 
 export default function Timer() {
   const [sessions, setSessions] = useState([])
@@ -14,12 +15,18 @@ export default function Timer() {
   const [isRunning, setIsRunning] = useState(false)
   const [showAlarm, setShowAlarm] = useState(false)
 
+  const sound = new Howl({ src: [ps1] })
+
   function timeDisplay(s) {
     return s === 0 ? '00' : s < 10 ? `${0}${s}` : s;
   }
 
   function toNum(n) {
     return parseInt(n === '' ? 0 : n, 10)
+  }
+
+  function playSound(sound) {
+    sound.play()
   }
 
   const loadTimer = useCallback(
@@ -58,7 +65,7 @@ export default function Timer() {
         setSeconds(59)
       } else if (hours === 0 && minutes === 0 && seconds === 0) {
         setShowAlarm(true)
-
+        playSound(sound)
         const newSessions = sessions.filter((session, i) => i !== 0)
         setSessions(newSessions)
         if (newSessions.length > 0) {
@@ -72,7 +79,7 @@ export default function Timer() {
 
       return () => clearInterval(intervalId)
     }
-  }, [isRunning, hours, minutes, seconds, sessions, loadTimer, showAlarm, restart])
+  }, [isRunning, hours, minutes, seconds, sessions, loadTimer, showAlarm, restart, sound])
 
     // < div className = 'modal bg-black z-10 absolute inset-0 flex justify-center items-center' >
     //   <div className='bg-gray-900 radius-custom'>
@@ -93,17 +100,8 @@ export default function Timer() {
 
   return (
     <div className='h-screen grid grid-rows-8 grid-cols-3'>
-      {showAlarm ? 
-        (<div className='modal bg-black z-10 absolute inset-0 flex justify-center items-center'>
-          <div className='bg-gray-900 radius-custom'>
-            <button
-              className='alarm-bell m-16 p-10 text-6xl '
-              onClick={() => setShowAlarm(false)}>
-              <FontAwesomeIcon icon={faBell} size='5x' color='orange' />
-            </button>
-          </div>
-        </div>) 
-        : null
+      {
+        showAlarm ? <Alarm setShowAlarm={setShowAlarm} /> : null
       }
       <PieChart />
       <p className='text-2xl row-end-3 row-span-3 col-start-1 col-span-3 flex justify-center items-end'>***Time is set to decrease by 100ms***</p>
