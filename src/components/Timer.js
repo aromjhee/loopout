@@ -35,9 +35,8 @@ export default function Timer() {
 
   useEffect(() => {
     (async function fetchSessions() {
-      const res = await fetch(url);
-      const json = await res.json();
-      console.log('=============', json.sessions)
+      const res = await fetch(url)
+      const json = await res.json()
       setSessions(json.sessions)
       loadTimer(json.sessions)
     })();
@@ -49,7 +48,7 @@ export default function Timer() {
       const intervalId = setInterval(() => {
         setSeconds(seconds => seconds - 1)
       }, 100)
-      console.log('^^^^^^^^^^^^^^^', seconds)
+
       if (hours > 0 && minutes === 0 && seconds === 0) {
         setHours(hours - 1)
         setMinutes(59)
@@ -74,23 +73,34 @@ export default function Timer() {
       return () => clearInterval(intervalId)
     }
   }, [isRunning, hours, minutes, seconds, sessions, loadTimer, showAlarm, restart])
+
+    // < div className = 'modal bg-black z-10 absolute inset-0 flex justify-center items-center' >
+    //   <div className='bg-gray-900 radius-custom'>
+    //     <div className='m-16 flex flex-col justify-center'>
+    //       <h4 className='text-6xl mb-12 p-16'>
+    //         <div className='alarm-bell'>
+    //           <FontAwesomeIcon icon={faBell} size='5x' color='orange' />
+    //         </div>
+    //       </h4>
+    //       <button
+    //         className='mx-16 px-5 py-10'
+    //         onClick={() => setShowAlarm(false)}>
+    //         <FontAwesomeIcon icon={faStopCircle} size='5x' color='red' />
+    //       </button>
+    //     </div>
+    //   </div>
+    // </div >
+
   return (
     <div className='h-screen grid grid-rows-8 grid-cols-3'>
       {showAlarm ? 
         (<div className='modal bg-black z-10 absolute inset-0 flex justify-center items-center'>
           <div className='bg-gray-900 radius-custom'>
-            <div className='m-16 flex flex-col justify-center'>
-              <h4 className='text-6xl mb-12 p-16'>
-                <div className='alarm-bell'>
-                  <FontAwesomeIcon icon={faBell} size='5x' color='orange' />
-                </div>
-              </h4>
-              <button
-                className='text-6xl mx-16 px-5 py-10 border-orange-900 border-8 radius-custom'
-                onClick={() => {
-                  setShowAlarm(false)
-                }}>STOP</button>
-            </div>
+            <button
+              className='alarm-bell m-16 p-10 text-6xl '
+              onClick={() => setShowAlarm(false)}>
+              <FontAwesomeIcon icon={faBell} size='5x' color='orange' />
+            </button>
           </div>
         </div>) 
         : null

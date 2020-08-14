@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import url from './url';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusSquare, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
@@ -11,14 +11,10 @@ export default function Session({ sessions, setSessions, loadTimer }) {
   const [newSeconds, setNewSeconds] = useState('')
 
   async function fetchSessionsList() {
-    const res = await fetch(url);
-    const json = await res.json();
-    setSessions(json.sessions);
+    const res = await fetch(url)
+    const json = await res.json()
+    setSessions(json.sessions)
   }
-
-  useEffect(() => {
-    fetchSessionsList()
-  }, [])
 
   async function addSession() {
     try {
