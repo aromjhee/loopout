@@ -5,6 +5,7 @@ import Alarm from './Alarm';
 import url from './url';
 import ps1 from '../sound/ps1.mp3';
 import { Howl } from 'howler';
+import CountUp from 'react-countup';
 
 export default function Timer() {
   const [sessions, setSessions] = useState([])
@@ -81,6 +82,7 @@ export default function Timer() {
     }
   }, [isRunning, hours, minutes, seconds, sessions, loadTimer, showAlarm, restart, sound])
 
+    // Alarm Modal with Stop Button
     // < div className = 'modal bg-black z-10 absolute inset-0 flex justify-center items-center' >
     //   <div className='bg-gray-900 radius-custom'>
     //     <div className='m-16 flex flex-col justify-center'>
@@ -108,9 +110,21 @@ export default function Timer() {
       <div className='row-start-3 row-span-1 col-start-1 col-span-3 text-4xl flex flex-col justify-evenly align-center items-center'>
         <div className='custom-animation'>
           <div className='time'>
-            {timeDisplay(hours)}:
-            {timeDisplay(minutes)}:
-            {timeDisplay(seconds)}
+            <CountUp 
+              start={0}
+              end={parseInt(timeDisplay(hours), 10)}
+              duration={2}
+              formattingFn={num => ('0' + num).slice(-2)} /> : 
+            <CountUp 
+              start={0}
+              end={parseInt(timeDisplay(minutes), 10)}
+              duration={2}
+              formattingFn={num => ('0' + num).slice(-2) } /> :
+            <CountUp 
+              start={0}
+              end={parseInt(timeDisplay(seconds), 10)}
+              duration={2}
+              formattingFn={num => ('0' + num).slice(-2) } />
           </div>
         </div>
         <div className='flex m-16'>

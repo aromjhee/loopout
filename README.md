@@ -43,8 +43,12 @@
 - BreakLength??
 - Timer
 
-# Technology
+# Technologies & Packages
 - Tailwind
+- React Countup
+- React Mobile Picker
+- Howler
+- FontAwesome Icons
 
 # Future Implementation
 - drag-n-drop to re-order sessions
