@@ -17,7 +17,7 @@
         - input
         - slider
     - Label: title/name
-    - Sound: choose
+    - Sound
     - Repeat: Mon ~ Sun, Everyday, Every other day, Weekdays, Weekends
     - +10sec, +15sec, +1min, +3min, +5min, +10min
 - Be able to save

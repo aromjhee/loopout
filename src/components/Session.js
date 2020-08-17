@@ -90,6 +90,38 @@ export default function Session({ sessions, setSessions, loadTimer }) {
             onChange={e => 
               setNewSeconds(parseInt(e.target.value === '' ? 0 : e.target.value, 10))} />
         </div>
+        <div className='mt-10'>
+          <button
+            className='text-gray-500 text-center px-2 mx-5 border border-indigo-400 rounded-lg'
+            onClick={() => setNewMinutes(parseInt(newMinutes === '' ? 0 : newMinutes, 10) + 1)}>
+            +1m</button>
+          <button
+            className='text-gray-500 text-center px-2 mx-5 border border-indigo-400 rounded-lg'
+            onClick={() => setNewMinutes(parseInt(newMinutes === '' ? 0 : newMinutes, 10) + 3)}>
+            +3m</button>
+          <button
+            className='text-gray-500 text-center px-2 mx-5 border border-indigo-400 rounded-lg'
+            onClick={() => setNewMinutes(parseInt(newMinutes === '' ? 0 : newMinutes, 10) + 5)}>
+            +5m</button>
+          <button
+            className='text-gray-500 text-center px-2 mx-5 border border-indigo-400 rounded-lg'
+            onClick={() => setNewMinutes(parseInt(newMinutes === '' ? 0 : newMinutes, 10) + 10)}>
+            +10m</button>
+        </div>
+        <div className='mt-10'>
+          <button
+            className='text-gray-500 text-center px-2 mx-5 border border-indigo-400 rounded-lg'
+            onClick={() => setNewSeconds(parseInt(newSeconds === '' ? 0 : newSeconds, 10) + 5)}>
+            +5s</button>
+          <button
+            className='text-gray-500 text-center px-2 mx-5 border border-indigo-400 rounded-lg'
+            onClick={() => setNewSeconds(parseInt(newSeconds === '' ? 0 : newSeconds, 10) + 10)}>
+            +10s</button>
+          <button
+            className='text-gray-500 text-center px-2 mx-5 border border-indigo-400 rounded-lg'
+            onClick={() => setNewSeconds(parseInt(newSeconds === '' ? 0 : newSeconds, 10) + 15)}>
+            +15s</button>
+        </div>
         <div className='my-16'>
           <button
             className='text-center'
@@ -98,7 +130,7 @@ export default function Session({ sessions, setSessions, loadTimer }) {
         </div>
       </div>
       <table className='row-start-5 row-span-3 text-3xl col-start-1 col-span-3 border-4 border-purple-500 rounded-lg w-screen'>
-        <thead className='border-b-4 border-purple-500'>
+        <thead className='border-b-4 border-purple-500 text-gray-500'>
           <tr>
             <th>Name</th>
             <th>Duration</th>
