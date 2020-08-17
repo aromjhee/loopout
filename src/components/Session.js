@@ -10,41 +10,47 @@ export default function Session({ sessions, setSessions, loadTimer }) {
   const [newHours, setNewHours] = useState('')
   const [newMinutes, setNewMinutes] = useState('')
   const [newSeconds, setNewSeconds] = useState('')
+  const [valueGroups, setValueGroups] = useState({
+    title: ['Mr.', 'Mrs.', 'Ms.', 'Dr.']
+  })
+  const [optionGroups, setOptionGroups] = useState({
+    title: ['Mr.', 'Mrs.', 'Ms.', 'Dr.'],
+  })
 
-  let hoursPickerOptions = {
-    '1': 1,
-    '2': 2,
-    '3': 3,
-    '4': 4,
-    '5': 5,
-    '6': 6,
-    '7': 7,
-    '8': 8,
-    '9': 9,
-    '10': 10,
-    '11': 11,
-    '12': 12,
-    '13': 13,
-    '14': 14,
-    '15': 15,
-    '16': 16,
-    '17': 17,
-    '18': 18,
-    '19': 19,
-    '20': 20,
-    '21': 21,
-    '22': 22,
-    '23': 23,
-    '24': 24
-  }
+  // let hoursPickerOptions = {
+  //   '1': 1,
+  //   '2': 2,
+  //   '3': 3,
+  //   '4': 4,
+  //   '5': 5,
+  //   '6': 6,
+  //   '7': 7,
+  //   '8': 8,
+  //   '9': 9,
+  //   '10': 10,
+  //   '11': 11,
+  //   '12': 12,
+  //   '13': 13,
+  //   '14': 14,
+  //   '15': 15,
+  //   '16': 16,
+  //   '17': 17,
+  //   '18': 18,
+  //   '19': 19,
+  //   '20': 20,
+  //   '21': 21,
+  //   '22': 22,
+  //   '23': 23,
+  //   '24': 24
+  // }
   // const hoursPickerOptions = {hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
   // for (let i = 1; i < 25; i++) {
   //   hoursPickerOptions[i] = i
   // }
-  let minAndSecPickerOptions = {}
-  for (let i = 1; i < 61; i++) {
-    minAndSecPickerOptions[i] = i
-  }
+  // let minAndSecPickerOptions = {}
+  // for (let i = 1; i < 61; i++) {
+  //   minAndSecPickerOptions[i] = i
+  // }
 
   async function fetchSessionsList() {
     const res = await fetch(url)
@@ -105,7 +111,8 @@ export default function Session({ sessions, setSessions, loadTimer }) {
         </div>
         <div className='flex flex-no-wrap'>
           <div className='h-20 text-center mx-2 bg-custom border border-indigo-400 placeholder-indigo-400 rounded-lg'>
-            <Picker hoursPickerOptions={hoursPickerOptions} />
+            <Picker optionGroups={optionGroups}
+              valueGroups={valueGroups} />
           </div>
           {/* <input
             className='h-20 text-center mx-2 bg-custom border border-indigo-400 placeholder-indigo-400 rounded-lg'
