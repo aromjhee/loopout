@@ -7,10 +7,6 @@
 - for example: schedule from when to wake up to how long I should take brushing my teeth, when and how long to get ready, etc
 - then be able to share this with other users to try out for themselves
 
-# Future Implementation
-- fun/interactive event when stopping the individual alarms
-    - when alarm rings, you must push stop in 15seconds and when you do it takes a selfie. at the end of the "day" it will compile all the selfies into one image or video or gif or what not so you can upload that as well
-
 # Feature
 - Timer / "Schedule" / "Time Segment" / "Session"
     - 00:00:00 ~ 24:00:00
@@ -51,4 +47,13 @@
 - FontAwesome Icons
 
 # Future Implementation
+- fun/interactive event when stopping the individual alarms
+    - when alarm rings, you must push stop in 15seconds and when you do it takes a selfie. at the end of the "day" it will compile all the selfies into one image or video or gif or what not so you can upload that as well
 - drag-n-drop to re-order sessions
+
+# Live Link
+[LoopOut](https://loopout.herokuapp.com/)
+[backend](https://loopout-backend.herokuapp.com/)
+
+# Back end repo
+[backend repo](https://github.com/aromjhee/loopout-backend)
