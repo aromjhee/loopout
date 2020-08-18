@@ -14,7 +14,7 @@ export default function Session({ sessions, setSessions, loadTimer }) {
     title: ['Mr.', 'Mrs.', 'Ms.', 'Dr.']
   })
   const [optionGroups, setOptionGroups] = useState({
-    title: ['Mr.', 'Mrs.', 'Ms.', 'Dr.'],
+    title: [1,2,3,4],
   })
 
   // let hoursPickerOptions = {
@@ -42,14 +42,6 @@ export default function Session({ sessions, setSessions, loadTimer }) {
   //   '22': 22,
   //   '23': 23,
   //   '24': 24
-  // }
-  // const hoursPickerOptions = {hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-  // for (let i = 1; i < 25; i++) {
-  //   hoursPickerOptions[i] = i
-  // }
-  // let minAndSecPickerOptions = {}
-  // for (let i = 1; i < 61; i++) {
-  //   minAndSecPickerOptions[i] = i
   // }
 
   async function fetchSessionsList() {
@@ -111,8 +103,11 @@ export default function Session({ sessions, setSessions, loadTimer }) {
         </div>
         <div className='flex flex-no-wrap'>
           <div className='h-20 text-center mx-2 bg-custom border border-indigo-400 placeholder-indigo-400 rounded-lg'>
-            <Picker optionGroups={optionGroups}
-              valueGroups={valueGroups} />
+            <Picker 
+              optionGroups={optionGroups}
+              valueGroups={valueGroups}
+              onChange={(n, v) =>
+                setNewHours(parseInt(v === '' ? 0 : v, 10))} />
           </div>
           {/* <input
             className='h-20 text-center mx-2 bg-custom border border-indigo-400 placeholder-indigo-400 rounded-lg'
