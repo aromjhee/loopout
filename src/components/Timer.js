@@ -127,7 +127,7 @@ export default function Timer() {
               formattingFn={num => ('0' + num).slice(-2) } />
           </div>
         </div>
-        <div className='flex m-16'>
+        <div className='flex mt-16 mb-10'>
           <button
             className='text-4xl mx-16 px-5 py-2 border-green-900 border-8 radius-custom'
             onClick={() => setIsRunning(true)}>Start</button>

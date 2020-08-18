@@ -1,48 +1,14 @@
 import React, { useState } from 'react';
 import url from './url';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMinusSquare, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
-import Picker from 'react-mobile-picker';
+import { faMinusSquare, faPlusCircle, faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 export default function Session({ sessions, setSessions, loadTimer }) {
 
   const [sessionName, setSessionName] = useState('')
-  const [newHours, setNewHours] = useState('')
-  const [newMinutes, setNewMinutes] = useState('')
-  const [newSeconds, setNewSeconds] = useState('')
-  const [valueGroups, setValueGroups] = useState({
-    title: ['Mr.', 'Mrs.', 'Ms.', 'Dr.']
-  })
-  const [optionGroups, setOptionGroups] = useState({
-    title: [1,2,3,4],
-  })
-
-  // let hoursPickerOptions = {
-  //   '1': 1,
-  //   '2': 2,
-  //   '3': 3,
-  //   '4': 4,
-  //   '5': 5,
-  //   '6': 6,
-  //   '7': 7,
-  //   '8': 8,
-  //   '9': 9,
-  //   '10': 10,
-  //   '11': 11,
-  //   '12': 12,
-  //   '13': 13,
-  //   '14': 14,
-  //   '15': 15,
-  //   '16': 16,
-  //   '17': 17,
-  //   '18': 18,
-  //   '19': 19,
-  //   '20': 20,
-  //   '21': 21,
-  //   '22': 22,
-  //   '23': 23,
-  //   '24': 24
-  // }
+  const [newHours, setNewHours] = useState(0)
+  const [newMinutes, setNewMinutes] = useState(0)
+  const [newSeconds, setNewSeconds] = useState(0)
 
   async function fetchSessionsList() {
     const res = await fetch(url)
@@ -93,7 +59,7 @@ export default function Session({ sessions, setSessions, loadTimer }) {
   return (     
     <div className='flex flex-col'>
       <div className='row-start-4 row-span-1 text-3xl col-start-1 col-span-3 flex flex-col items-center'>
-        <div className='my-16'>
+        <div className='mb-5'>
           <input
             className='w-custom h-20 text-center bg-custom border border-indigo-400 placeholder-indigo-400 rounded-lg'
             type='text' 
@@ -102,34 +68,86 @@ export default function Session({ sessions, setSessions, loadTimer }) {
             onChange={e => setSessionName(e.target.value)} />
         </div>
         <div className='flex flex-no-wrap'>
-          <div className='h-20 text-center mx-2 bg-custom border border-indigo-400 placeholder-indigo-400 rounded-lg'>
-            <Picker 
-              optionGroups={optionGroups}
-              valueGroups={valueGroups}
-              onChange={(n, v) =>
-                setNewHours(parseInt(v === '' ? 0 : v, 10))} />
+          <div className='flex flex-col'>
+            <div className='text-indigo-300 flex justify-center items-end'>Hours</div>
+            <div className='flex items-center justify-around h-20 w-64 text-center mx-2 bg-custom border border-indigo-400 rounded-full'>
+              <button 
+                onClick={() => {
+                  if (newHours <= 0) {
+                    setNewHours(0)
+                  } else {
+                    setNewHours(newHours => newHours - 1)
+                  }
+                }}>
+                <FontAwesomeIcon icon={faAngleLeft} size='lg' color='#a3bffa' />
+              </button>
+              <div className='text-white'>{newHours}</div>
+              <button
+                onClick={() => {
+                  if (newHours >= 24) {
+                    setNewHours(24)
+                  } else {
+                    setNewHours(newHours => newHours + 1)
+                  }
+                }}>
+                <FontAwesomeIcon icon={faAngleRight} size='lg' color='#a3bffa' />
+              </button>
+            </div>
           </div>
-          {/* <input
-            className='h-20 text-center mx-2 bg-custom border border-indigo-400 placeholder-indigo-400 rounded-lg'
-            type='number'
-            value={newHours}
-            placeholder='Hours'
-            onChange={e => 
-              setNewHours(parseInt(e.target.value === '' ? 0 : e.target.value, 10))} /> */}
-          <input
-            className='h-20 text-center mx-2 bg-custom border border-indigo-400 placeholder-indigo-400 rounded-lg'
-            type='number'
-            value={newMinutes}
-            placeholder='Minutes'
-            onChange={e => 
-              setNewMinutes(parseInt(e.target.value === '' ? 0 : e.target.value, 10))} />
-          <input
-            className='h-20 text-center mx-2 bg-custom border border-indigo-400 placeholder-indigo-400 rounded-lg'
-            type='number'
-            value={newSeconds}
-            placeholder='Seconds'
-            onChange={e => 
-              setNewSeconds(parseInt(e.target.value === '' ? 0 : e.target.value, 10))} />
+          <div className='flex flex-col'>
+            <div className='text-indigo-300 flex justify-center items-end'>Minutes</div>
+            <div className='flex items-center justify-around h-20 w-64 text-center mx-2 bg-custom border border-indigo-400 rounded-full'>
+              <button
+                onClick={() => {
+                  if (newMinutes <= 0) {
+                    setNewMinutes(0)
+                  } else {
+                    setNewMinutes(newMinutes => newMinutes - 1)
+                  }
+                }}>
+                <FontAwesomeIcon icon={faAngleLeft} size='lg' color='#a3bffa' />
+              </button>
+              <div className='text-white'>{newMinutes}</div>
+              <button
+                onClick={() => {
+                  if (newMinutes === 59) {
+                    setNewHours(newHours => newHours + 1)
+                    setNewMinutes(0)
+                  } else {
+                    setNewMinutes(newMinutes => newMinutes + 1)
+                  }
+                }}>
+                <FontAwesomeIcon icon={faAngleRight} size='lg' color='#a3bffa' />
+              </button>
+            </div>
+          </div>
+          <div className='flex flex-col'>
+            <div className='text-indigo-300 flex justify-center items-end'>Seconds</div>
+            <div className='flex items-center justify-around h-20 w-64 text-center mx-2 bg-custom border border-indigo-400 rounded-full'>
+              <button
+                onClick={() => {
+                  if (newSeconds <= 0) {
+                    setNewSeconds(0)
+                  } else {
+                    setNewSeconds(newSeconds => newSeconds - 1)
+                  }
+                }}>
+                <FontAwesomeIcon icon={faAngleLeft} size='lg' color='#a3bffa' />
+              </button>
+              <div className='text-white'>{newSeconds}</div>
+              <button
+                onClick={() => {
+                  if (newSeconds === 59) {
+                    setNewMinutes(newMinutes => newMinutes + 1)
+                    setNewSeconds(0)
+                  } else {
+                    setNewSeconds(newSeconds => newSeconds + 1)
+                  }
+                }}>
+                <FontAwesomeIcon icon={faAngleRight} size='lg' color='#a3bffa' />
+              </button>
+            </div>
+          </div>
         </div>
         <div className='mt-10'>
           <button
@@ -150,6 +168,10 @@ export default function Session({ sessions, setSessions, loadTimer }) {
             +10m</button>
         </div>
         <div className='mt-10'>
+          <button
+            className='text-gray-500 text-center px-2 mx-5 border border-indigo-400 rounded-lg'
+            onClick={() => setNewSeconds(parseInt(newSeconds === '' ? 0 : newSeconds, 10) + 1)}>
+            +1s</button>
           <button
             className='text-gray-500 text-center px-2 mx-5 border border-indigo-400 rounded-lg'
             onClick={() => setNewSeconds(parseInt(newSeconds === '' ? 0 : newSeconds, 10) + 5)}>
