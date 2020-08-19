@@ -5,7 +5,6 @@ import Alarm from './Alarm';
 import url from './url';
 import ps1 from '../sound/ps1.mp3';
 import { Howl } from 'howler';
-import CountUp from 'react-countup';
 
 export default function Timer() {
   const [sessions, setSessions] = useState([])
@@ -110,21 +109,9 @@ export default function Timer() {
       <div className='row-start-3 row-span-1 col-start-1 col-span-3 text-4xl flex flex-col justify-evenly align-center items-center'>
         <div className='custom-animation'>
           <div className='time'>
-            <CountUp 
-              start={0}
-              end={parseInt(timeDisplay(hours), 10)}
-              duration={2}
-              formattingFn={num => ('0' + num).slice(-2)} /> : 
-            <CountUp 
-              start={0}
-              end={parseInt(timeDisplay(minutes), 10)}
-              duration={2}
-              formattingFn={num => ('0' + num).slice(-2) } /> :
-            <CountUp 
-              start={0}
-              end={parseInt(timeDisplay(seconds), 10)}
-              duration={2}
-              formattingFn={num => ('0' + num).slice(-2) } />
+            {timeDisplay(hours)}:
+            {timeDisplay(minutes)}:
+            {timeDisplay(seconds)}
           </div>
         </div>
         <div className='flex mt-16 mb-10'>

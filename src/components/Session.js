@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import url from './url';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusSquare, faPlusCircle, faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import CountUp from 'react-countup';
 
 export default function Session({ sessions, setSessions, loadTimer }) {
 
@@ -224,7 +225,23 @@ export default function Session({ sessions, setSessions, loadTimer }) {
                 return (
                   <tr key={i} className='text-center'>
                     <td>{name}</td>
-                    <td>{`${hours}:${minutes}:${seconds}`}</td>
+                    <td>
+                      <CountUp
+                        start={0}
+                        end={parseInt(hours)}
+                        duration={2}
+                        formattingFn={num => ('0' + num).slice(-2)} />:
+                      <CountUp
+                        start={0}
+                        end={parseInt(minutes)}
+                        duration={2}
+                        formattingFn={num => ('0' + num).slice(-2)} />:
+                      <CountUp
+                        start={0}
+                        end={parseInt(seconds)}
+                        duration={2}
+                        formattingFn={num => ('0' + num).slice(-2)} />
+                    </td>
                     <td>
                       <button onClick={() => {deleteSession(x.id)}}>
                         <FontAwesomeIcon icon={faMinusSquare} size='2x' color='#fc8181' /></button>
