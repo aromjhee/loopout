@@ -6,6 +6,10 @@
   width: 335px;
 }
 
+.h-600px {
+  height: 600px;
+}
+
 .bg-custom {
   background-color: #1b262c;
 }

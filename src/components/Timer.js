@@ -100,7 +100,7 @@ export default function Timer() {
     // </div >
 
   return (
-    <div className='h-screen grid grid-rows-8 grid-cols-3'>
+    <div className='h-full grid grid-rows-8 grid-cols-3'>
       {
         showAlarm ? <Alarm setShowAlarm={setShowAlarm} /> : null
       }

@@ -14,8 +14,7 @@
         - slider
     - Label: title/name
     - Sound
-    - Repeat: Mon ~ Sun, Everyday, Every other day, Weekdays, Weekends
-    - +10sec, +15sec, +1min, +3min, +5min, +10min
+    - button for +1s, +5s, +10s, +15s, +1m, +3m, +5m, +10m
 - Be able to save
     - table to store beginTime, endTime, label
 - Pie Chart summarizing the day's time table
@@ -50,6 +49,7 @@
 - fun/interactive event when stopping the individual alarms
     - when alarm rings, you must push stop in 15seconds and when you do it takes a selfie. at the end of the "day" it will compile all the selfies into one image or video or gif or what not so you can upload that as well
 - drag-n-drop to re-order sessions
+- Repeat: Mon ~ Sun, Everyday, Every other day, Weekdays, Weekends
 
 # Live Link
 [LoopOut](https://loopout.herokuapp.com/)

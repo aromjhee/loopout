@@ -31,9 +31,9 @@ export default function Session({ sessions, setSessions, loadTimer }) {
       })
       if (res.ok) {
         setSessionName('')
-        setNewHours('')
-        setNewMinutes('')
-        setNewSeconds('')
+        setNewHours(0)
+        setNewMinutes(0)
+        setNewSeconds(0)
         fetchSessionsList()
       }
     } catch (e) {
@@ -213,14 +213,18 @@ export default function Session({ sessions, setSessions, loadTimer }) {
             (
               sessions.map((x, i) => {
                 const y = x.duration.split(':')
-                let [a, b, c] = y
+                const [a, b, c] = y
+                console.log(y)
                 const name = x.name
-                const hours = (a === 0 || a === '') ? '00' : a < 10 ? 
-                              `${0}${a}` : a;
-                const minutes = (b === 0 || b === '') ? '00' : b < 10 ? 
-                              `${0}${b}` : b;
-                const seconds = (c === 0 || c === '') ? '00' : c < 10 ? 
-                              `${0}${c}` : c;
+                // const hours = (a === 0 || a === '') ? '00' : a < 10 ? 
+                //               `${0}${a}` : a;
+                // const minutes = (b === 0 || b === '') ? '00' : b < 10 ? 
+                //               `${0}${b}` : b;
+                // const seconds = (c === 0 || c === '') ? '00' : c < 10 ? 
+                //               `${0}${c}` : c;
+                const hoursToSec = parseInt(a === '' ? 0 : a, 10) * 60 * 60
+                const minutesToSec = parseInt(b === '' ? 0 : b, 10) * 60
+                const timeInSec = hoursToSec + minutesToSec + parseInt(c === '' ? 0 : c, 10)
 
                 return (
                   <tr key={i} className='text-center'>
@@ -228,19 +232,32 @@ export default function Session({ sessions, setSessions, loadTimer }) {
                     <td>
                       <CountUp
                         start={0}
+                        end={timeInSec}
+                        duration={3}
+                        formattingFn={num => {
+                          const hours = Math.floor(num / 3600)
+                          const minutes = Math.floor((num - hours * 60 * 60) / 60)
+                          const seconds = num - hours * 60 - minutes * 60
+                          const hoursToStr = ('0' + hours).slice(-2)
+                          const minutesToStr = ('0' + minutes).slice(-2)
+                          const secondsToStr = ('0' + seconds).slice(-2)
+                          return `${hoursToStr}:${minutesToStr}:${secondsToStr}`
+                        }} />
+                      {/* <CountUp
+                        start={0}
                         end={parseInt(hours)}
-                        duration={2}
+                        duration={3}
                         formattingFn={num => ('0' + num).slice(-2)} />:
                       <CountUp
                         start={0}
                         end={parseInt(minutes)}
-                        duration={2}
+                        duration={3}
                         formattingFn={num => ('0' + num).slice(-2)} />:
                       <CountUp
                         start={0}
                         end={parseInt(seconds)}
-                        duration={2}
-                        formattingFn={num => ('0' + num).slice(-2)} />
+                        duration={3}
+                        formattingFn={num => ('0' + num).slice(-2)} /> */}
                     </td>
                     <td>
                       <button onClick={() => {deleteSession(x.id)}}>
