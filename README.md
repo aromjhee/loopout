@@ -10,8 +10,6 @@
 # Feature
 - Timer / "Schedule" / "Time Segment" / "Session"
     - 00:00:00 ~ 24:00:00
-        - input
-        - slider
     - Label: title/name
     - Sound
     - button for +1s, +5s, +10s, +15s, +1m, +3m, +5m, +10m
@@ -22,6 +20,7 @@
        OR
       just different color codes per segment
 - Home page
+- User Auth
 - Calendar
 
 # Model
@@ -52,8 +51,8 @@
 - Repeat: Mon ~ Sun, Everyday, Every other day, Weekdays, Weekends
 
 # Live Link
-[LoopOut](https://loopout.herokuapp.com/)
-[backend](https://loopout-backend.herokuapp.com/)
+- [LoopOut](https://loopout.herokuapp.com/)
+- [backend](https://loopout-backend.herokuapp.com/)
 
 # Back end repo
-[backend repo](https://github.com/aromjhee/loopout-backend)
+- [backend repo](https://github.com/aromjhee/loopout-backend)

@@ -196,15 +196,15 @@ export default function Session({ sessions, setSessions, loadTimer }) {
       <table className='row-start-5 row-span-3 text-3xl col-start-1 col-span-3 border-4 border-purple-500 rounded-lg w-screen'>
         <thead className='border-b-4 border-purple-500 text-gray-500'>
           <tr>
-            <th>Name</th>
-            <th>Duration</th>
-            <th></th>
+            <th className='w-1/2'>Name</th>
+            <th className='w-1/4'>Duration</th>
+            <th className='w-1/4'></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className=''>
           {sessions.length === 0 ? 
             (
-              <tr>
+              <tr className=''>
                 <td>Loading...</td>
                 <td>Loading...</td>
                 <td>Loading...</td>

@@ -15,7 +15,9 @@ export default function Timer() {
   const [isRunning, setIsRunning] = useState(false)
   const [showAlarm, setShowAlarm] = useState(false)
 
-  const sound = new Howl({ src: [ps1] })
+  const sound = new Howl({ 
+    src: [ps1] 
+  })
 
   function timeDisplay(s) {
     return s === 0 ? '00' : s < 10 ? `${0}${s}` : s;
@@ -54,7 +56,7 @@ export default function Timer() {
     if (isRunning && !showAlarm) {
       const intervalId = setInterval(() => {
         setSeconds(seconds => seconds - 1)
-      }, 100)
+      }, 25)
 
       if (hours > 0 && minutes === 0 && seconds === 0) {
         setHours(hours - 1)
@@ -104,8 +106,8 @@ export default function Timer() {
       {
         showAlarm ? <Alarm setShowAlarm={setShowAlarm} /> : null
       }
-      <PieChart />
-      <p className='text-2xl row-end-3 row-span-3 col-start-1 col-span-3 flex justify-center items-end'>***Time is set to decrease by 100ms***</p>
+      <PieChart sessions={sessions} />
+      <p className='text-2xl row-end-3 row-span-3 col-start-1 col-span-3 flex justify-center items-end'>***Time is set to decrease by 25ms***</p>
       <div className='row-start-3 row-span-1 col-start-1 col-span-3 text-4xl flex flex-col justify-evenly align-center items-center'>
         <div className='custom-animation'>
           <div className='time'>
