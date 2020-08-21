@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Pie } from 'react-chartjs-2';
 
-export default function PieChart({ sessions }) {
+export default function PieChart({ sessions, totalTimeInSec }) {
   const [colors, setColors] = useState([])
 
   const randomColor = () => {
@@ -43,12 +43,14 @@ export default function PieChart({ sessions }) {
   
 
   return (
-    <div className='h-700px flex items-center row-end-3 row-span-3 col-start-1 col-span-3'>
+    <div className='h-700px flex flex-col items-center justify-around row-end-3 row-span-3 col-start-1 col-span-3'>
       <Pie 
         data={data}
         options={{ 
-          legend: { display: false },
-        }} />
+          legend: { display: false } }} />
+      <p className='text-2xl flex justify-center items-end'>
+        ***Time is set to decrease by 25ms***
+      </p>
     </div>
   )
 }

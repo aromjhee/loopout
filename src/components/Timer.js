@@ -15,8 +15,12 @@ export default function Timer() {
   const [isRunning, setIsRunning] = useState(false)
   const [showAlarm, setShowAlarm] = useState(false)
 
+  // ps1.mp3 lasts 15 sec total
   const sound = new Howl({ 
-    src: [ps1] 
+    src: [ps1],
+    sprite: {
+      short: [0, 10000]
+    } 
   })
 
   function timeDisplay(s) {
@@ -28,7 +32,7 @@ export default function Timer() {
   }
 
   function playSound(sound) {
-    sound.play()
+    sound.play('short')
   }
 
   const loadTimer = useCallback(
@@ -107,7 +111,6 @@ export default function Timer() {
         showAlarm ? <Alarm setShowAlarm={setShowAlarm} /> : null
       }
       <PieChart sessions={sessions} />
-      <p className='text-2xl row-end-3 row-span-3 col-start-1 col-span-3 flex justify-center items-end'>***Time is set to decrease by 25ms***</p>
       <div className='row-start-3 row-span-1 col-start-1 col-span-3 text-4xl flex flex-col justify-evenly align-center items-center'>
         <div className='custom-animation'>
           <div className='time'>

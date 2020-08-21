@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import url from './url';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusSquare, faPlusCircle, faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import CountUp from 'react-countup';
 
 export default function Session({ sessions, setSessions, loadTimer }) {
-
+  const [totalTimeInSec, setTotalTimeInSec] = useState(0)
   const [sessionName, setSessionName] = useState('')
   const [newHours, setNewHours] = useState(0)
   const [newMinutes, setNewMinutes] = useState(0)
@@ -56,6 +56,25 @@ export default function Session({ sessions, setSessions, loadTimer }) {
     }
   }
 
+  useEffect(() => {
+    if (sessions.length !== 0) {
+      const timeInSecArr = sessions.map((x) => {
+        const y = x.duration.split(':')
+        const [a, b, c] = y
+        const hoursToSec = parseInt(a === '' ? 0 : a, 10) * 60 * 60
+        const minutesToSec = parseInt(b === '' ? 0 : b, 10) * 60
+        return hoursToSec + minutesToSec + parseInt(c === '' ? 0 : c, 10)
+      })
+      setTotalTimeInSec(timeInSecArr.reduce((acc, curr) => acc + curr))
+    }
+  }, [sessions])
+
+  const h = Math.floor(totalTimeInSec / 3600)
+  const m = Math.floor((totalTimeInSec - h * 60 * 60) / 60)
+  const s = totalTimeInSec - h * 60 * 60 - m * 60
+  const hToStr = ('0' + h).slice(-2)
+  const mToStr = ('0' + m).slice(-2)
+  const sToStr = ('0' + s).slice(-2)
 
   return (     
     <div className='flex flex-col lg:max-w-lg lg:m-auto'>
@@ -193,61 +212,69 @@ export default function Session({ sessions, setSessions, loadTimer }) {
             <FontAwesomeIcon icon={faPlusCircle} size='2x' color='#4fd1c5' /></button>
         </div>
       </div>
-      <table className='row-start-5 row-span-3 text-3xl col-start-1 col-span-3 border-4 border-purple-500 rounded-lg w-screen'>
-        <thead className='border-b-4 border-purple-500 text-gray-500'>
-          <tr>
-            <th className='w-1/2'>Name</th>
-            <th className='w-1/4'>Duration</th>
-            <th className='w-1/4'></th>
-          </tr>
-        </thead>
-        <tbody className=''>
+      <div className='row-start-5 row-span-3 text-3xl col-start-1 col-span-3 flex flex-col items-center'>
+        <p className='text-4xl text-gray-500 mb-5'>
           {sessions.length === 0 ? 
-            (
-              <tr className=''>
-                <td>Loading...</td>
-                <td>Loading...</td>
-                <td>Loading...</td>
-              </tr>
-            ) : 
-            (
-              sessions.map((x, i) => {
-                const y = x.duration.split(':')
-                const [a, b, c] = y
-                const name = x.name
-                const hoursToSec = parseInt(a === '' ? 0 : a, 10) * 60 * 60
-                const minutesToSec = parseInt(b === '' ? 0 : b, 10) * 60
-                const timeInSec = hoursToSec + minutesToSec + parseInt(c === '' ? 0 : c, 10)
-
-                return (
-                  <tr key={i} className='text-center'>
-                    <td>{name}</td>
-                    <td>
-                      <CountUp
-                        start={0}
-                        end={timeInSec}
-                        duration={3}
-                        formattingFn={num => {
-                          const hours = Math.floor(num / 3600)
-                          const minutes = Math.floor((num - hours * 60 * 60) / 60)
-                          const seconds = num - hours * 60 * 60 - minutes * 60
-                          const hoursToStr = ('0' + hours).slice(-2)
-                          const minutesToStr = ('0' + minutes).slice(-2)
-                          const secondsToStr = ('0' + seconds).slice(-2)
-                          return `${hoursToStr}:${minutesToStr}:${secondsToStr}`
-                        }} />
-                    </td>
-                    <td>
-                      <button onClick={() => {deleteSession(x.id)}}>
-                        <FontAwesomeIcon icon={faMinusSquare} size='2x' color='#fc8181' /></button>
-                    </td>
-                  </tr>
-                )
-              })
-            )
+            'Loading...' : 
+            `Total Time ${hToStr}:${mToStr}:${sToStr}`
           }
-        </tbody>
-      </table>
+        </p>
+        <table className='border-4 border-purple-500 rounded-lg w-screen'>
+          <thead className='border-b-4 border-purple-500 text-gray-500'>
+            <tr>
+              <th className='w-1/2'>Name</th>
+              <th className='w-1/4'>Duration</th>
+              <th className='w-1/4'></th>
+            </tr>
+          </thead>
+          <tbody className=''>
+            {sessions.length === 0 ? 
+              (
+                <tr className=''>
+                  <td>Loading...</td>
+                  <td>Loading...</td>
+                  <td>Loading...</td>
+                </tr>
+              ) : 
+              (
+                sessions.map((x, i) => {
+                  const y = x.duration.split(':')
+                  const [a, b, c] = y
+                  const name = x.name
+                  const hoursToSec = parseInt(a === '' ? 0 : a, 10) * 60 * 60
+                  const minutesToSec = parseInt(b === '' ? 0 : b, 10) * 60
+                  const timeInSec = hoursToSec + minutesToSec + parseInt(c === '' ? 0 : c, 10)
+
+                  return (
+                    <tr key={i} className='text-center'>
+                      <td>{name}</td>
+                      <td>
+                        <CountUp
+                          start={0}
+                          end={timeInSec}
+                          duration={3}
+                          formattingFn={num => {
+                            const hours = Math.floor(num / 3600)
+                            const minutes = Math.floor((num - hours * 60 * 60) / 60)
+                            const seconds = num - hours * 60 * 60 - minutes * 60
+                            const hoursToStr = ('0' + hours).slice(-2)
+                            const minutesToStr = ('0' + minutes).slice(-2)
+                            const secondsToStr = ('0' + seconds).slice(-2)
+                            return `${hoursToStr}:${minutesToStr}:${secondsToStr}`
+                          }} />
+                      </td>
+                      <td>
+                        <button onClick={() => {deleteSession(x.id)}}>
+                          <FontAwesomeIcon icon={faMinusSquare} size='2x' color='#fc8181' /></button>
+                      </td>
+                    </tr>
+                  )
+                })
+              )
+            }
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }
