@@ -14,6 +14,10 @@
   height: 700px;
 }
 
+.max-h-550px {
+  max-height: 550px;
+}
+
 .bg-custom {
   background-color: #1b262c;
 }
@@ -51,7 +55,7 @@
 .custom-animation::before {
   border: 3px solid #fafafa;
   border-radius: 100%;
-  animation: 1s linear infinite alternate aberration, 4s linear infinite spin;
+  animation: 1s linear infinite alternate aberration, 5s linear infinite spin;
   padding-top: 100%;
   content: "";
   position: relative;
@@ -60,10 +64,10 @@
 
 @keyframes aberration {
   from {
-    box-shadow: 0 0 0 0 #CB2918, 0 0 0 0 #56719A;
+    box-shadow: 0 0 0 0 #fa26a0, 0 0 0 0 #a8ff3e;
   }
   to {
-    box-shadow: 0.25rem 0.125rem 0 0 #CB2918, -0.25rem -0.125rem 0 0 #56719A;
+    box-shadow: 0.25rem 0.125rem 0 0 #fa26a0, -0.25rem -0.125rem 0 0 #a8ff3e;
     /* for browser */
     /* box-shadow: 0.5rem 0.25rem 0 0 #CB2918, -0.5rem -0.25rem 0 0 #56719A; */
   }

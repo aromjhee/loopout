@@ -3,7 +3,7 @@ import Timer from './components/Timer';
 
 function App() {
   return (
-    <div className='bg-custom font-color-custom font-custom'>
+    <div className='bg-custom font-color-custom font-custom m-auto'>
       <Timer />
     </div>
   );

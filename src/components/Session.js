@@ -58,7 +58,7 @@ export default function Session({ sessions, setSessions, loadTimer }) {
 
 
   return (     
-    <div className='flex flex-col'>
+    <div className='flex flex-col lg:max-w-lg lg:m-auto'>
       <div className='row-start-4 row-span-1 text-3xl col-start-1 col-span-3 flex flex-col items-center'>
         <div className='mb-5'>
           <input
