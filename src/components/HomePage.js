@@ -1,20 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 // import image from '../image/home.jpg';
 
 export default function HomePage() {
-  const [showGetStarted, setShowGetStarted] = useState(false)
+  // const [showGetStarted, setShowGetStarted] = useState(false)
 
-  useEffect(() => {
-    
-  })
+  // useEffect(() => {
+
+  // })
 
   return (
-    <div className='custom-background-image h-screen'>
-      <button className='text-6xl text-red-100'>
-        <Link to='/loopout'>Get Started</Link>
-      </button>
+    <div className='custom-background-image h-screen grid grid-rows-6'>
+      <div className='flex justify-center items-end text-6xl row-span-1 font-sans font-bold'>Welcome.</div>
+      <div className='flex justify-center items-center text-4xl row-span-1 font-sans font-light'>Give Away Control.</div>
+      <div className='flex justify-center items-baseline text-4xl row-span-1 font-sans font-thin italic'>Create Your Loop.</div>
+      <div className='flex justify-center items-center text-4xl row-span-1'>
+        <button className='flex justify-center items-center home-button-style font-mono font-extrabold animate-pulse'>
+          <Link to='/loopout'>Start</Link>
+        </button>
+      </div>
+      <div className='row-span-1'></div>
+      <div className='row-span-1'></div>
     </div>
   )
 }
