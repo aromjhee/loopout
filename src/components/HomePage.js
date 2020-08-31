@@ -13,10 +13,13 @@ export default function HomePage() {
   return (
     <div className='custom-background-image h-screen grid grid-rows-6'>
       <div className='flex justify-center items-end text-6xl row-span-1 font-sans font-bold'>Welcome.</div>
-      <div className='flex justify-center items-center text-4xl row-span-1 font-sans font-light'>Give Away Control.</div>
-      <div className='flex justify-center items-baseline text-4xl row-span-1 font-sans font-thin italic'>Create Your Loop.</div>
-      <div className='flex justify-center items-center text-4xl row-span-1'>
-        <button className='flex justify-center items-center home-button-style font-mono font-extrabold animate-pulse'>
+      <div className='flex justify-center items-center text-4xl row-span-1 font-sans font-light letter-spacing'>Give Away Control.</div>
+      <div className='flex justify-center items-baseline text-5xl row-span-1 font-sans font-thin italic letter-spacing'>
+        Create Your 
+        <span className='text-5xl glitch-1'>Loop</span>
+      </div>
+      <div className='flex justify-center items-center row-span-1'>
+        <button className='flex justify-center items-center home-button-style font-mono font-extrabold animate-pulse start-text'>
           <Link to='/loopout'>Start</Link>
         </button>
       </div>

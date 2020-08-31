@@ -1,0 +1,60 @@
+.glitch-1 {
+    color: white;
+    font-family: sans-serif;
+    font-weight: 100;
+    position: relative;
+    font-size: 3rem;
+    padding: 20px;
+
+    &:before, &:after {
+        padding: 20px;
+        color: white;
+        content: "Loop";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        overflow: hidden;
+        top: 0;
+    }
+}
+  
+.glitch-1::before {
+    left: 3px;
+    text-shadow: -2px 0 red;
+    animation-name: glitch-animation-1;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    animation-direction: reverse-alternate;
+}
+    
+.glitch-1::after {
+    left: -3px;
+    text-shadow: -2px 0 blue;
+    animation-name: glitch-animation-2;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    animation-direction: reverse-alternate;
+}
+  
+@keyframes glitch-animation-1 {
+  $steps: 20;
+  @for $i from 0 through $steps {
+    #{percentage($i*(1/$steps))} {
+      clip: rect(random(150)+px, 350px, random(150)+px, 30px);
+    }
+  }
+}
+    
+@keyframes glitch-animation-2 {
+  $steps: 20;
+  @for $i from 0 through $steps { 
+    #{percentage($i*(1/$steps))} {
+      clip: rect(random(150)+px, 350px, random(150)+px, 30px)
+    }
+  }
+}
