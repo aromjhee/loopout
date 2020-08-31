@@ -12,20 +12,20 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  animation: blur 6s ease 0s;
-  -webkit-animation: blur 6s ease 0s;
-  -moz-animation: blur 6s ease 0s;
+  animation: blur 5s ease 0s;
+  -webkit-animation: blur 5s ease 0s;
+  -moz-animation: blur 5s ease 0s;
 }
 
 @keyframes blur {
   0%,
-  90% {
+  95% {
     -webkit-filter: blur(0px);
     -moz-filter: blur(0px);
     -o-filter: blur(0px);
     -ms-filter: blur(0px);
   }
-  50% {
+  10% {
     -webkit-filter: blur(50px);
     -moz-filter: blur(50px);
     -o-filter: blur(50px);
