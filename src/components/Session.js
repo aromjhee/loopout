@@ -252,7 +252,7 @@ export default function Session({ sessions, setSessions, loadTimer }) {
                         <CountUp
                           start={0}
                           end={timeInSec}
-                          duration={3}
+                          duration={2.5}
                           formattingFn={num => {
                             const hours = Math.floor(num / 3600)
                             const minutes = Math.floor((num - hours * 60 * 60) / 60)
