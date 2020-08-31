@@ -11,7 +11,7 @@ export default function HomePage() {
   // })
 
   return (
-    <div className='custom-background-image h-screen grid grid-rows-6'>
+    <div className='custom-background-image blur-loading h-screen grid grid-rows-6'>
       <div className='flex justify-center items-end text-5xl row-span-1 font-sans font-bold'>Welcome.</div>
       <div className='flex justify-center items-center text-4xl row-span-1 font-sans font-light letter-spacing'>Give Away Control.</div>
       <div className='flex justify-center items-baseline text-5xl row-span-1 font-sans font-thin italic letter-spacing'>

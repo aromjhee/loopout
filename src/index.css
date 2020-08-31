@@ -12,14 +12,16 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.blur-loading {
   animation: blur 5s ease 0s;
   -webkit-animation: blur 5s ease 0s;
   -moz-animation: blur 5s ease 0s;
 }
 
 @keyframes blur {
-  0%,
-  95% {
+  100% {
     -webkit-filter: blur(0px);
     -moz-filter: blur(0px);
     -o-filter: blur(0px);
