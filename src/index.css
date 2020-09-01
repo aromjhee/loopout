@@ -15,9 +15,9 @@
 }
 
 .blur-loading {
-  animation: blur 3s ease 0.5s;
-  -webkit-animation: blur 3s ease 0.5s;
-  -moz-animation: blur 3s ease 0.5s;
+  animation: blur 3s ease 0s;
+  -webkit-animation: blur 3s ease 0s;
+  -moz-animation: blur 3s ease 0s;
 }
 
 @keyframes blur {
@@ -131,10 +131,6 @@
 }
 
 /* Alarm Modal and Alarm Bell */
-.top-50perc {
-  top: 50%;
-}
-
 .alarm-bell {
   animation: infinite shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
   transform: translate3d(0, 0, 0);
