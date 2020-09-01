@@ -13,7 +13,7 @@ export default function Timer() {
   const [minutes, setMinutes] = useState(0)
   const [seconds, setSeconds] = useState(0)
   const [isRunning, setIsRunning] = useState(false)
-  const [showAlarm, setShowAlarm] = useState(false)
+  const [showAlarm, setShowAlarm] = useState(true)
 
   // ps1.mp3 lasts 15 sec total
   const sound = new Howl({ 
@@ -108,7 +108,9 @@ export default function Timer() {
   return (
     <div className='h-full grid grid-rows-8 grid-cols-3'>
       {
-        showAlarm ? <Alarm setShowAlarm={setShowAlarm} /> : null
+        showAlarm ? (
+          <Alarm setShowAlarm={setShowAlarm} />
+        ) : null
       }
       <PieChart sessions={sessions} />
       <div className='row-start-3 row-span-1 col-start-1 col-span-3 text-4xl flex flex-col justify-evenly align-center items-center'>

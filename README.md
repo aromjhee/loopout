@@ -41,6 +41,7 @@
     - Howler
     - FontAwesome Icons
     - postcss-cli
+    - SCSS
 - Back end
     - Python
     - Flask
