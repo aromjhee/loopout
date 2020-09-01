@@ -5,7 +5,7 @@ import Timer from './components/Timer';
 
 function App() {
   return (
-    <div className='bg-custom font-color-custom font-custom m-auto'>
+    <div className='bg-custom font-color-custom font-custom m-auto relative'>
       <BrowserRouter>
         <Switch>
           <Route exact path='/' component={HomePage} />

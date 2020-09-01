@@ -131,8 +131,8 @@
 }
 
 /* Alarm Modal and Alarm Bell */
-.modal {
-  transition: opacity 0.25s ease;
+.top-50perc {
+  top: 50%;
 }
 
 .alarm-bell {
