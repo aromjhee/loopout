@@ -54,16 +54,12 @@
     - Bcrypt
 
 # Technical Challenge
-- Had to encode and decode password because PostgreSQL encodes data again before saving to the database.
-    - for my register route:
+- Had to encode password to utf-8 then decode again after hashing because PostgreSQL automatically converts text encoding before saving.
+    - in the register route:
         ```python
         hashed_password = bcrypt.hashpw(
             password.encode('utf-8'), bcrypt.gensalt()
         ).decode('utf-8')
-        ```
-    - for my login route:
-        ```python
-        bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8'))
         ```
 
 # Future Implementation
