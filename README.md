@@ -47,9 +47,24 @@
     - Flask
     - SQLAlchemy
     - Alembic
-    - Postgres
+    - PostgreSQL
     - Flask-Migrate
     - Psycopg
+    - Flask-JWT-Extended
+    - Bcrypt
+
+# Technical Challenge
+- Had to encode and decode password because PostgreSQL encodes data again before saving to the database.
+    - for my register route:
+        ```python
+        hashed_password = bcrypt.hashpw(
+            password.encode('utf-8'), bcrypt.gensalt()
+        ).decode('utf-8')
+        ```
+    - for my login route:
+        ```python
+        bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8'))
+        ```
 
 # Future Implementation
 - drag-n-drop to re-order sessions
