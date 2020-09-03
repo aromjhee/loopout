@@ -14,7 +14,7 @@ export default function HomePage() {
       </div>
       <div className='flex justify-center items-center row-span-1'>
         <button className='flex justify-center items-center home-button-style font-mono font-extrabold animate-pulse start-text'>
-          <Link to='/loopout'>Start</Link>
+          <Link to='/login'>Start</Link>
         </button>
       </div>
       <div className='row-span-1'></div>
