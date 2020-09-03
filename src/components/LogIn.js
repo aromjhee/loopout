@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import url from './url';
 
 export default function LogIn() {
+  const history = useHistory()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState([])
 
   const login = async () => {
     try {
@@ -21,7 +23,10 @@ export default function LogIn() {
       if (res.ok) {
         const { access_token } = await res.json()
         localStorage.setItem('LOOPOUT_TOKEN', access_token)
-        res.redirect('/home')
+        history.push('/home')
+      } else {
+        const error = await res.json()
+        setError(Object.values(error))
       }
     } catch(e) {
       console.log(e)
@@ -35,26 +40,35 @@ export default function LogIn() {
   }
 
   return (
-    <div className='bg-custom font-color-custom font-customs h-screen flex justify-center items-center'>
+    <div className='bg-custom font-color-custom font-customs h-screen flex flex-col justify-center items-center'>
+      {
+        error ? (
+          error.map((message, i) => (
+            <div key={i} className="w-1/3 mb-10 text-2xl bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 rounded flex justify-center" role="alert">
+              <p className="font-bold">{message}</p>
+            </div>
+          ))
+        ) : null
+      }
       <form className='w-5/6 text-4xl mr-16'>
         <div className='md:flex md:items-center mb-16'>
           <div className='md:w-1/3'>
-            <label className='block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4' htmlFor='inline-full-name'>
+            <label className='block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4' htmlFor='email'>
               E-mail
             </label>
           </div>
           <div className='md:w-2/3'>
-            <input className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500' id='inline-full-name' type='text' placeholder='email@email.com' onChange={(e) => setEmail(e.target.value)} />
+            <input className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500' id='email' type='email' placeholder='email@email.com' value={email} onChange={(e) => setEmail(e.target.value)} />
           </div>
         </div>
         <div className='md:flex md:items-center mb-24'>
           <div className='md:w-1/3'>
-            <label className='block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4' htmlFor='inline-password'>
+            <label className='block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4' htmlFor='password'>
               Password
             </label>
           </div>
           <div className='md:w-2/3'>
-            <input className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500' id='inline-password' type='password' placeholder='*********' autoComplete='on' onChange={(e) => setPassword(e.target.value)} />
+            <input className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500' id='password' type='password' placeholder='*********' autoComplete='on' value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
         </div>
         <div className='md:flex md:items-center mb-32 justify-center'>
