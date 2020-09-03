@@ -25,7 +25,7 @@ export default function LogIn() {
         localStorage.setItem('LOOPOUT_TOKEN', access_token)
         history.push('/home')
       } else {
-        const error = await res.json()
+        const error = await res.json() 
         setError(Object.values(error))
       }
     } catch(e) {
