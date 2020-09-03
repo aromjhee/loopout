@@ -1,16 +1,37 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import url from './url';
 
 export default function LogIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const login = () => {
-
+  const login = async () => {
+    try {
+      const res = await fetch(`${url}login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email,
+          password
+        })
+      })
+      if (res.ok) {
+        const { access_token } = await res.json()
+        localStorage.setItem('LOOPOUT_TOKEN', access_token)
+        res.redirect('/home')
+      }
+    } catch(e) {
+      console.log(e)
+    }
   }
 
   const demoLogin = () => {
-
+    setEmail('test@test.com')
+    setPassword('asdf')
+    login()
   }
 
   return (
@@ -23,7 +44,7 @@ export default function LogIn() {
             </label>
           </div>
           <div className='md:w-2/3'>
-            <input className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500' id='inline-full-name' type='text' placeholder='email@email.com' />
+            <input className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500' id='inline-full-name' type='text' placeholder='email@email.com' onChange={(e) => setEmail(e.target.value)} />
           </div>
         </div>
         <div className='md:flex md:items-center mb-24'>
@@ -33,7 +54,7 @@ export default function LogIn() {
             </label>
           </div>
           <div className='md:w-2/3'>
-            <input className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500' id='inline-password' type='password' placeholder='*********' />
+            <input className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500' id='inline-password' type='password' placeholder='*********' autoComplete='on' onChange={(e) => setPassword(e.target.value)} />
           </div>
         </div>
         <div className='md:flex md:items-center mb-32 justify-center'>
