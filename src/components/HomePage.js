@@ -1,14 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// import image from '../image/home.jpg';
-
 export default function HomePage() {
-  // const [showGetStarted, setShowGetStarted] = useState(false)
-
-  // useEffect(() => {
-
-  // })
 
   return (
     <div className='custom-background-image blur-loading h-screen grid grid-rows-6'>

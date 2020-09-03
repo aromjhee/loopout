@@ -15,23 +15,23 @@
 }
 
 .blur-loading {
-  animation: blur 3s ease 0s;
-  -webkit-animation: blur 3s ease 0s;
-  -moz-animation: blur 3s ease 0s;
+  animation: blur 2.5s ease 0s;
+  -webkit-animation: blur 2.5s ease 0s;
+  -moz-animation: blur 2.5s ease 0s;
 }
 
 @keyframes blur {
+  0% {
+    -webkit-filter: blur(50px);
+    -moz-filter: blur(50px);
+    -o-filter: blur(50px);
+    -ms-filter: blur(50px);
+  }
   100% {
     -webkit-filter: blur(0px);
     -moz-filter: blur(0px);
     -o-filter: blur(0px);
     -ms-filter: blur(0px);
-  }
-  10% {
-    -webkit-filter: blur(50px);
-    -moz-filter: blur(50px);
-    -o-filter: blur(50px);
-    -ms-filter: blur(50px);
   }
 }
 

@@ -3,7 +3,8 @@ import PieChart from './PieChart';
 import Session from './Session';
 import Alarm from './Alarm';
 import url from './url';
-import ps1 from '../sound/ps1.mp3';
+// import ps1 from '../sound/ps1.mp3';
+import silk from '../sound/iphone_alarm_silk.mp3';
 import { Howl } from 'howler';
 
 export default function Timer() {
@@ -16,11 +17,19 @@ export default function Timer() {
   const [showAlarm, setShowAlarm] = useState(false)
 
   // ps1.mp3 lasts 15 sec total
-  const sound = new Howl({ 
-    src: [ps1],
+  // const sound = new Howl({ 
+  //   src: [ps1],
+  //   sprite: {
+  //     short: [0, 10000]
+  //   } 
+  // })
+
+  // iphone alarm sound 'silk' 22 sec total
+  const sound1 = new Howl({
+    src: [silk],
     sprite: {
-      short: [0, 10000]
-    } 
+      short: [0, 5000]
+    }
   })
 
   function timeDisplay(s) {
@@ -71,7 +80,7 @@ export default function Timer() {
         setSeconds(59)
       } else if (hours === 0 && minutes === 0 && seconds === 0) {
         setShowAlarm(true)
-        playSound(sound)
+        playSound(sound1)
         const newSessions = sessions.filter((session, i) => i !== 0)
         setSessions(newSessions)
         if (newSessions.length > 0) {
@@ -85,7 +94,7 @@ export default function Timer() {
 
       return () => clearInterval(intervalId)
     }
-  }, [isRunning, hours, minutes, seconds, sessions, loadTimer, showAlarm, restart, sound])
+  }, [isRunning, hours, minutes, seconds, sessions, loadTimer, showAlarm, restart, sound1])
 
     // Alarm Modal with Stop Button
     // < div className = 'modal bg-black z-10 absolute inset-0 flex justify-center items-center' >
