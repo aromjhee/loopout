@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import PieChart from './PieChart';
 import Session from './Session';
 import Alarm from './Alarm';
@@ -8,6 +9,7 @@ import silk from '../sound/iphone_alarm_silk.mp3';
 import { Howl } from 'howler';
 
 export default function Timer() {
+  const history = useHistory()
   const [sessions, setSessions] = useState([])
   const [restart, setRestart] = useState(false)
   const [hours, setHours] = useState(0)
@@ -58,13 +60,17 @@ export default function Timer() {
   )
 
   useEffect(() => {
-    (async function fetchSessions() {
-      const res = await fetch(`${url}${userId}`)
-      const json = await res.json()
-      setSessions(json.sessions)
-      loadTimer(json.sessions)
-    })();
-  }, [loadTimer, restart, userId])
+    if (!userId) {
+      history.push('/login')
+    } else {
+      (async function fetchSessions() {
+        const res = await fetch(`${url}${userId}`)
+        const json = await res.json()
+        setSessions(json.sessions)
+        loadTimer(json.sessions)
+      })();
+    }
+  }, [loadTimer, restart, userId, history])
 
 
   useEffect(() => {
