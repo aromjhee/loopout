@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusSquare, faPlusCircle, faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import CountUp from 'react-countup';
 
-export default function Session({ sessions, setSessions, loadTimer }) {
+export default function Session({ sessions, setSessions, loadTimer, userId }) {
   const [totalTimeInSec, setTotalTimeInSec] = useState(0)
   const [sessionName, setSessionName] = useState('')
   const [newHours, setNewHours] = useState(0)

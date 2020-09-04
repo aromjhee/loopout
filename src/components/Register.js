@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import url from './url';
 
-export default function Register() {
+export default function Register({ setUserId }) {
   const history = useHistory()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -19,13 +19,14 @@ export default function Register() {
         body: JSON.stringify({
           email,
           password,
-          rePassword
+          'repassword': rePassword
         })
       })
       if (res.ok) {
-        const { access_token } = await res.json()
+        const { access_token, userId } = await res.json()
         localStorage.setItem('LOOPOUT_TOKEN', access_token)
-        history.push('/login')
+        // setUserId(userId)
+        history.push('/home')
       } else {
         const error = await res.json()
         setError(Object.values(error))
