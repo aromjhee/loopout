@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusSquare, faPlusCircle, faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import CountUp from 'react-countup';
 
-export default function Session({ sessions, setSessions, loadTimer, userId }) {
+export default function Session({ sessions, setSessions, loadTimer, userId, isLoading }) {
   const [totalTimeInSec, setTotalTimeInSec] = useState(0)
   const [sessionName, setSessionName] = useState('')
   const [newHours, setNewHours] = useState(0)
@@ -209,13 +209,13 @@ export default function Session({ sessions, setSessions, loadTimer, userId }) {
           <button
             className='text-center'
             onClick={addSession}>
-            <FontAwesomeIcon icon={faPlusCircle} size='2x' color='#4fd1c5' /></button>
+            <FontAwesomeIcon icon={faPlusCircle} size='3x' color='#4fd1c5' /></button>
         </div>
       </div>
       <div className='row-start-5 row-span-3 text-3xl col-start-1 col-span-3 flex flex-col items-center'>
         <p className='text-4xl text-gray-500 mb-5'>
-          {sessions.length === 0 ? 
-            'Loading...' : 
+          {isLoading ? 'Loading...' : sessions.length === 0 ? 
+            <span className='text-orange-500'>Please Add New Session</span> : 
             `Total Time ${hToStr}:${mToStr}:${sToStr}`
           }
         </p>
@@ -227,15 +227,19 @@ export default function Session({ sessions, setSessions, loadTimer, userId }) {
               <th className='w-1/4'></th>
             </tr>
           </thead>
-          <tbody className=''>
-            {sessions.length === 0 ? 
+          <tbody>
+            {isLoading ? 
               (
-                <tr className=''>
-                  <td>Loading...</td>
+                <tr>
                   <td>Loading...</td>
                   <td>Loading...</td>
                 </tr>
-              ) : 
+              ) : sessions.length === 0 ? (
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+              ) :
               (
                 sessions.map((x, i) => {
                   const y = x.duration.split(':')

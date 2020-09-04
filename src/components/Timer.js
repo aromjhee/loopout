@@ -17,6 +17,7 @@ export default function Timer() {
   const [seconds, setSeconds] = useState(0)
   const [isRunning, setIsRunning] = useState(false)
   const [showAlarm, setShowAlarm] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   const userId = localStorage.getItem('LOOPOUT_USER_ID')
 
@@ -50,6 +51,10 @@ export default function Timer() {
 
   const loadTimer = useCallback(
     (sessions) => {
+      if (sessions.length === 0) {
+        return
+      }
+      // loads timer for first session
       const { duration } = sessions[0]
       const [hours, minutes, seconds] = duration.split(':');
 
@@ -68,9 +73,10 @@ export default function Timer() {
         const json = await res.json()
         setSessions(json.sessions)
         loadTimer(json.sessions)
+        setIsLoading(false)
       })();
     }
-  }, [loadTimer, restart, userId, history])
+  }, [loadTimer, userId, history])
 
 
   useEffect(() => {
@@ -153,7 +159,8 @@ export default function Timer() {
             sessions={sessions} 
             setSessions={setSessions} 
             loadTimer={loadTimer}
-            userId={userId} />
+            userId={userId}
+            isLoading={isLoading} />
         </div>
       </div>
     </>
