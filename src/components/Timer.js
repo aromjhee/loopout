@@ -16,6 +16,8 @@ export default function Timer() {
   const [isRunning, setIsRunning] = useState(false)
   const [showAlarm, setShowAlarm] = useState(false)
 
+  const userId = localStorage.getItem('LOOPOUT_USER_ID')
+
   // ps1.mp3 lasts 15 sec total
   // const sound = new Howl({ 
   //   src: [ps1],
@@ -57,12 +59,12 @@ export default function Timer() {
 
   useEffect(() => {
     (async function fetchSessions() {
-      const res = await fetch(url)
+      const res = await fetch(`${url}${userId}`)
       const json = await res.json()
       setSessions(json.sessions)
       loadTimer(json.sessions)
     })();
-  }, [loadTimer, restart])
+  }, [loadTimer, restart, userId])
 
 
   useEffect(() => {
@@ -144,7 +146,8 @@ export default function Timer() {
           <Session 
             sessions={sessions} 
             setSessions={setSessions} 
-            loadTimer={loadTimer} />
+            loadTimer={loadTimer}
+            userId={userId} />
         </div>
       </div>
     </>

@@ -12,14 +12,14 @@ export default function Session({ sessions, setSessions, loadTimer, userId }) {
   const [newSeconds, setNewSeconds] = useState(0)
 
   async function fetchSessionsList() {
-    const res = await fetch(url)
+    const res = await fetch(`${url}${userId}`)
     const json = await res.json()
     setSessions(json.sessions)
   }
 
   async function addSession() {
     try {
-      const res = await fetch(`${url}add`, {
+      const res = await fetch(`${url}${userId}/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import url from './url';
 
-export default function LogIn({ setUserId }) {
+export default function LogIn() {
   const history = useHistory()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -23,8 +23,8 @@ export default function LogIn({ setUserId }) {
       if (res.ok) {
         const { access_token, userId } = await res.json()
         localStorage.setItem('LOOPOUT_TOKEN', access_token)
-        // setUserId(userId)
-        history.push('/home')
+        localStorage.setItem('LOOPOUT_USER_ID', userId)
+        history.push('/loopout')
       } else {
         const error = await res.json() 
         setError(Object.values(error))
