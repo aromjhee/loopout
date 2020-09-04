@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import url from './url';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMinusSquare, faPlusCircle, faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { faMinusSquare, faAngleLeft, faAngleRight, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import CountUp from 'react-countup';
 
 export default function Session({ sessions, setSessions, loadTimer, userId, isLoading }) {
@@ -209,14 +209,14 @@ export default function Session({ sessions, setSessions, loadTimer, userId, isLo
           <button
             className='text-center'
             onClick={addSession}>
-            <FontAwesomeIcon icon={faPlusCircle} size='3x' color='#4fd1c5' /></button>
+            <FontAwesomeIcon icon={faPlusSquare} size='3x' color='#4fd1c5' /></button>
         </div>
       </div>
       <div className='row-start-5 row-span-3 text-3xl col-start-1 col-span-3 flex flex-col items-center'>
-        <p className='text-4xl text-gray-500 mb-5'>
+        <p className='text-4xl text-orange-500 mb-5'>
           {isLoading ? 'Loading...' : sessions.length === 0 ? 
-            <span className='text-orange-500'>Please Add New Session</span> : 
-            `Total Time ${hToStr}:${mToStr}:${sToStr}`
+            'Please Add New Session' : 
+            `${hToStr}:${mToStr}:${sToStr}`
           }
         </p>
         <table className='border-4 border-purple-500 rounded-lg w-screen'>

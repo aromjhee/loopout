@@ -45,7 +45,7 @@ export default function LogIn() {
       {
         error ? (
           error.map((message, i) => (
-            <div key={i} className="w-1/3 mb-10 text-2xl bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 rounded flex justify-center" role="alert">
+            <div key={i} className="w-1/3 mb-10 text-3xl bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 rounded flex justify-center" role="alert">
               <p className="font-bold">{message}</p>
             </div>
           ))
