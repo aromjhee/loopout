@@ -74,11 +74,11 @@ export default function LogIn() {
           </div>
           <div className='md:flex md:items-center mb-32 justify-center'>
             <div className='md:w-2/3 flex flex-col justify-center'>
-              <button className='shadow bg-purple-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-8 rounded-full mb-16' type='button' onClick={() => login()}>
+              <button className='shadow bg-purple-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-8 rounded-full mb-16' type='button' onClick={login}>
                 Log-in
               </button>
               <button className='shadow bg-teal-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-8 rounded-full' type='button'
-              onClick={() => demoLogin()}>
+              onClick={demoLogin}>
                 Demo Log-in
               </button>
             </div>
