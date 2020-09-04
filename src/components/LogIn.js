@@ -4,11 +4,16 @@ import url from './url';
 
 export default function LogIn() {
   const history = useHistory()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  let [email, setEmail] = useState('')
+  let [password, setPassword] = useState('')
   const [error, setError] = useState([])
 
-  const login = async () => {
+  const login = async (isDemo=false) => {
+    if (isDemo) {
+      email = 'test@test.com'
+      password = 'asdf'
+    }
+
     try {
       const res = await fetch(`${url}login`, {
         method: 'POST',
@@ -34,10 +39,12 @@ export default function LogIn() {
     }
   }
 
+  const userLogin = () => {
+    login(false)
+  }
+
   const demoLogin = () => {
-    setEmail('test@test.com')
-    setPassword('asdf')
-    login()
+    login(true)
   }
 
   return (
@@ -75,7 +82,7 @@ export default function LogIn() {
           </div>
           <div className='md:flex md:items-center mb-32 justify-center'>
             <div className='md:w-2/3 flex flex-col justify-center'>
-              <button className='shadow bg-purple-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-8 rounded-full mb-16' type='button' onClick={login}>
+              <button className='shadow bg-purple-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-8 rounded-full mb-16' type='button' onClick={userLogin}>
                 Log-in
               </button>
               <button className='shadow bg-teal-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-8 rounded-full' type='button'
