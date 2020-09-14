@@ -49,6 +49,12 @@ export default function Timer() {
     sound.play('short')
   }
 
+  function toggleAnimation() {
+    const animationDiv = document.getElementById('animation-div')
+    animationDiv.classList.toggle('custom-animation')
+    animationDiv.classList.toggle('custom-no-animation')
+  }
+
   const loadTimer = useCallback(
     (sessions) => {
       if (sessions.length === 0) {
@@ -138,12 +144,12 @@ export default function Timer() {
       <div className='h-full grid grid-rows-8 grid-cols-3'>
         <PieChart sessions={sessions} />
         <div className='row-start-3 row-span-1 col-start-1 col-span-3 text-4xl flex flex-col justify-evenly align-center items-center'>
-          <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-            <input type="checkbox" name="toggle" id="toggle" className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" />
-            <label for="toggle" className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+          <div className="relative inline-block w-16 align-middle mb-4 select-none transition duration-200 ease-in">
+            <input type="checkbox" name="toggle" id="toggle" className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" onClick={toggleAnimation} />
+            <label htmlFor="toggle" className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
           </div>
-          <label for="toggle" className="text-2xl text-white mb-6">Animation</label>
-          <div className='custom-animation'>
+          <label htmlFor="toggle" className="text-2xl text-white mb-6">Animation</label>
+          <div id='animation-div' className='custom-animation'>
             <div className='time'>
               {timeDisplay(hours)}:
               {timeDisplay(minutes)}:

@@ -105,6 +105,22 @@
 }
 
 /* For circle around timer */
+.custom-no-animation {
+  width: 100%;
+  max-width: 30rem;
+  position: relative;
+  display: grid;
+}
+
+.custom-no-animation::before {
+  border: 3px solid #fafafa;
+  border-radius: 100%;
+  padding-top: 100%;
+  content: "";
+  position: relative;
+  pointer-events: none;
+}
+
 .custom-animation {
   width: 100%;
   max-width: 30rem;
