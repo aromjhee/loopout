@@ -28,13 +28,13 @@ export default function PieChart({ sessions }) {
   }
 
   for (let i = 0; i < sessions.length; i++) {
-    let s = sessions[i]
+    const s = sessions[i]
     
-    let y = s.duration.split(':')
-    let [a, b, c] = y
-    let hoursToSec = parseInt(a === '' ? 0 : a, 10) * 60 * 60
-    let minutesToSec = parseInt(b === '' ? 0 : b, 10) * 60
-    let timeInSec = hoursToSec + minutesToSec + parseInt(c === '' ? 0 : c, 10)
+    const y = s.duration.split(':')
+    const [a, b, c] = y
+    const hoursToSec = parseInt(a === '' ? 0 : a, 10) * 60 * 60
+    const minutesToSec = parseInt(b === '' ? 0 : b, 10) * 60
+    const timeInSec = hoursToSec + minutesToSec + parseInt(c === '' ? 0 : c, 10)
     
     data.labels.push(s.name)
     data.datasets[0].data.push(timeInSec)
