@@ -113,6 +113,10 @@ export default function Session({ sessions, setSessions, loadTimer, userId, isLo
                 <FontAwesomeIcon icon={faAngleRight} size='lg' color='#a3bffa' />
               </button>
             </div>
+            <button
+              className='text-gray-500 text-center px-2 self-center mt-10 border border-indigo-400 rounded-lg'
+              onClick={() => setNewHours(0)}>
+              Clear Hrs</button>
           </div>
           <div className='flex flex-col'>
             <div className='text-indigo-300 flex justify-center items-end'>Minutes</div>
@@ -120,6 +124,9 @@ export default function Session({ sessions, setSessions, loadTimer, userId, isLo
               <button
                 onClick={() => {
                   if (newMinutes <= 0) {
+                    setNewMinutes(0)
+                  } else if (newMinutes === 60) {
+                    setNewHours(newHours => newHours + 1)
                     setNewMinutes(0)
                   } else {
                     setNewMinutes(newMinutes => newMinutes - 1)
@@ -140,6 +147,10 @@ export default function Session({ sessions, setSessions, loadTimer, userId, isLo
                 <FontAwesomeIcon icon={faAngleRight} size='lg' color='#a3bffa' />
               </button>
             </div>
+            <button
+              className='text-gray-500 text-center px-2 self-center mt-10 border border-indigo-400 rounded-lg'
+              onClick={() => setNewMinutes(0)}>
+              Clear Mins</button>
           </div>
           <div className='flex flex-col'>
             <div className='text-indigo-300 flex justify-center items-end'>Seconds</div>
@@ -167,42 +178,102 @@ export default function Session({ sessions, setSessions, loadTimer, userId, isLo
                 <FontAwesomeIcon icon={faAngleRight} size='lg' color='#a3bffa' />
               </button>
             </div>
+            <button
+              className='text-gray-500 text-center px-2 self-center mt-10 border border-indigo-400 rounded-lg'
+              onClick={() => setNewSeconds(0)}>
+              Clear Secs</button>
           </div>
         </div>
         <div className='mt-10'>
           <button
             className='text-gray-500 text-center px-2 mx-5 border border-indigo-400 rounded-lg'
-            onClick={() => setNewMinutes(parseInt(newMinutes === '' ? 0 : newMinutes, 10) + 1)}>
+            onClick={() => {
+              if (newMinutes >= 59) {
+                setNewHours(newHours => newHours + 1)
+                setNewMinutes(0)
+              } else {
+                setNewMinutes(parseInt(newMinutes === '' ? 0 : newMinutes, 10) + 1)
+              }
+            }}>
             +1m</button>
           <button
             className='text-gray-500 text-center px-2 mx-5 border border-indigo-400 rounded-lg'
-            onClick={() => setNewMinutes(parseInt(newMinutes === '' ? 0 : newMinutes, 10) + 3)}>
+            onClick={() => {
+              if (newMinutes >= 57) {
+                setNewHours(newHours => newHours + 1)
+                setNewMinutes(0)
+              } else {
+                setNewMinutes(parseInt(newMinutes === '' ? 0 : newMinutes, 10) + 3)
+              }
+            }}>
             +3m</button>
           <button
             className='text-gray-500 text-center px-2 mx-5 border border-indigo-400 rounded-lg'
-            onClick={() => setNewMinutes(parseInt(newMinutes === '' ? 0 : newMinutes, 10) + 5)}>
+            onClick={() => {
+              if (newMinutes >= 55) {
+                setNewHours(newHours => newHours + 1)
+                setNewMinutes(0)
+              } else {
+                setNewMinutes(parseInt(newMinutes === '' ? 0 : newMinutes, 10) + 5)
+              }
+            }}>
             +5m</button>
           <button
             className='text-gray-500 text-center px-2 mx-5 border border-indigo-400 rounded-lg'
-            onClick={() => setNewMinutes(parseInt(newMinutes === '' ? 0 : newMinutes, 10) + 10)}>
+            onClick={() => {
+              if (newMinutes >= 50) {
+                setNewHours(newHours => newHours + 1)
+                setNewMinutes(0)
+              } else {
+                setNewMinutes(parseInt(newMinutes === '' ? 0 : newMinutes, 10) + 10)
+              }
+            }}>
             +10m</button>
         </div>
         <div className='mt-10'>
           <button
             className='text-gray-500 text-center px-2 mx-5 border border-indigo-400 rounded-lg'
-            onClick={() => setNewSeconds(parseInt(newSeconds === '' ? 0 : newSeconds, 10) + 1)}>
+            onClick={() => {
+              if (newSeconds >= 59) {
+                setNewMinutes(newMinutes => newMinutes + 1)
+                setNewSeconds(0)
+              } else {
+                setNewSeconds(parseInt(newSeconds === '' ? 0 : newSeconds, 10) + 1)
+              }
+            }}>
             +1s</button>
           <button
             className='text-gray-500 text-center px-2 mx-5 border border-indigo-400 rounded-lg'
-            onClick={() => setNewSeconds(parseInt(newSeconds === '' ? 0 : newSeconds, 10) + 5)}>
+            onClick={() => {
+              if (newSeconds >= 55) {
+                setNewMinutes(newMinutes => newMinutes + 1)
+                setNewSeconds(0)
+              } else {
+                setNewSeconds(parseInt(newSeconds === '' ? 0 : newSeconds, 10) + 5)
+              }
+            }}>
             +5s</button>
           <button
             className='text-gray-500 text-center px-2 mx-5 border border-indigo-400 rounded-lg'
-            onClick={() => setNewSeconds(parseInt(newSeconds === '' ? 0 : newSeconds, 10) + 10)}>
+            onClick={() => {
+              if (newSeconds >= 50) {
+                setNewMinutes(newMinutes => newMinutes + 1)
+                setNewSeconds(0)
+              } else {
+                setNewSeconds(parseInt(newSeconds === '' ? 0 : newSeconds, 10) + 10)
+              }
+            }}>
             +10s</button>
           <button
             className='text-gray-500 text-center px-2 mx-5 border border-indigo-400 rounded-lg'
-            onClick={() => setNewSeconds(parseInt(newSeconds === '' ? 0 : newSeconds, 10) + 15)}>
+            onClick={() => {
+              if (newSeconds >= 45) {
+                setNewMinutes(newMinutes => newMinutes + 1)
+                setNewSeconds(0)
+              } else {
+                setNewSeconds(parseInt(newSeconds === '' ? 0 : newSeconds, 10) + 15)
+              }
+            }}>
             +15s</button>
         </div>
         <div className='my-16'>
