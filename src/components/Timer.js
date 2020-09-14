@@ -34,7 +34,8 @@ export default function Timer() {
     src: [silk],
     sprite: {
       short: [0, 5000]
-    }
+    },
+    volume: 0.7
   })
 
   function timeDisplay(s) {
