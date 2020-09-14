@@ -56,6 +56,12 @@ export default function Timer() {
     animationDiv.classList.toggle('custom-no-animation')
   }
 
+  function logOut() {
+    localStorage.removeItem('LOOPOUT_USER_ID')
+    localStorage.removeItem('LOOPOUT_TOKEN')
+    history.push('/login')
+  }
+
   const loadTimer = useCallback(
     (sessions) => {
       if (sessions.length === 0) {
@@ -142,6 +148,11 @@ export default function Timer() {
           <Alarm setShowAlarm={setShowAlarm} />
         ) : null
       }
+      <div className='w-screen flex justify-end px-6'>
+        <button className='text-yellow-500 text-bold text-3xl mt-12 text-right border border-yellow-200 px-3 rounded-lg' onClick={logOut}>
+          Log Out
+        </button>
+      </div>
       <div className='h-full grid grid-rows-8 grid-cols-3'>
         <PieChart sessions={sessions} />
         <div className='row-start-3 row-span-1 col-start-1 col-span-3 text-4xl flex flex-col justify-evenly align-center items-center'>
