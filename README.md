@@ -1,4 +1,5 @@
 # Loop Out is is optimized for mobile experience
+![LoopOut.gif](public/image/loopOut.gif)
 
 ## Live Link
 - [LoopOut](https://loopout.herokuapp.com/)
