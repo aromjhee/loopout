@@ -3,7 +3,7 @@
 
 ## Live Link
 - [LoopOut](https://loopout.herokuapp.com/)
-- [backend](https://loopout-backend.herokuapp.com/)
+- [backend](https://loopout-backend.herokuapp.com/1)
 
 ## Back end repo
 - [backend repo](https://github.com/aromjhee/loopout-backend)
